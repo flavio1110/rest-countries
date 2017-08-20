@@ -1,0 +1,46 @@
+pipeline:
+  build:
+    image: microsoft/dotnet:2.0.0-sdk
+    when:
+      event: push
+      branch: [master]
+    privileged: true
+    commands:
+    - dotnet --info
+    - dotnet restore
+    - dotnet build
+  buid-docker: 
+    image: docker:17.04.0-ce
+    when:
+      event: push
+      branch: [master]
+    privileged: true
+    environment:
+      - REGISTRY_PASSWORD=${REGISTRY_PASSWORD}
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    commands:
+      - dotnet --info
+      - cd src/RestCountries.Api/
+      - dotnet publish -c Release -o ../../docker-publish -v minimal
+      - docker login --username=registry --password=$REGISTRY_PASSWORD registry.fsilva.me
+      - docker build -t registry.fsilva.me/rest-country:1.0.${DRONE_BUILD_NUMBER} docker-publish
+      - docker push registry.fsilva.me/rest-country:1.0.${DRONE_BUILD_NUMBER}
+    secrets: [ REGISTRY_PASSWORD ]
+
+  deploy-containers: 
+    image: docker:17.04.0-ce
+    when:
+      event: push
+      branch: [master]
+    environment:
+    - IMAGE_VERSION=1.0.${DRONE_BUILD_NUMBER}
+    - REGISTRY_PASSWORD=${REGISTRY_PASSWORD}
+    privileged: true
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    commands:
+      - docker image prune -af
+      - docker login --username=registry --password=$REGISTRY_PASSWORD registry.fsilva.me
+      - docker stack deploy --with-registry-auth -c stack.yml rest-country
+    secrets: [ REGISTRY_PASSWORD ]

@@ -1,0 +1,15 @@
+version: '3'
+
+services:
+  api:
+    image: registry.fsilva.me/rest-country:${IMAGE_VERSION}
+    ports:
+      - 5050:80
+    deploy:
+      replicas: 1
+      update_config:
+        parallelism: 1
+        delay: 60s
+      placement:
+        constraints:
+          - node.labels.stack == app
