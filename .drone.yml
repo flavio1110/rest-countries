@@ -3,7 +3,7 @@ pipeline:
     image: microsoft/dotnet:2.0.0-sdk
     when:
       event: push
-      #branch: [master]
+      branch: [master]
     privileged: true
     commands:
     - dotnet --info
@@ -17,15 +17,13 @@ pipeline:
     image: docker:17.04.0-ce
     when:
       event: push
-      #branch: [master]
+      branch: [master]
     privileged: true
     environment:
       - REGISTRY_PASSWORD=${REGISTRY_PASSWORD}
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
     commands:
-      - echo $(pwd)
-      - ls
       - docker login --username=registry --password=$REGISTRY_PASSWORD registry.fsilva.me
       - docker build -t registry.fsilva.me/rest-country:1.0.${DRONE_BUILD_NUMBER} docker-publish
       - docker push registry.fsilva.me/rest-country:1.0.${DRONE_BUILD_NUMBER}
@@ -35,7 +33,7 @@ pipeline:
     image: docker:17.04.0-ce
     when:
       event: push
-      #branch: [master]
+      branch: [master]
     environment:
     - IMAGE_VERSION=1.0.${DRONE_BUILD_NUMBER}
     - REGISTRY_PASSWORD=${REGISTRY_PASSWORD}
