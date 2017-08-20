@@ -5,6 +5,8 @@ services:
     image: registry.fsilva.me/rest-country:${IMAGE_VERSION}
     ports:
       - 5050:80
+    networks:
+      - mynet      
     deploy:
       replicas: 1
       update_config:
@@ -13,3 +15,7 @@ services:
       placement:
         constraints:
           - node.labels.stack == app
+
+networks:
+  mynet:
+    external: true
