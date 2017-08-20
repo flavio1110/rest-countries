@@ -12,6 +12,7 @@ pipeline:
     - cd src/RestCountries.Api/
     - dotnet publish -c Release -o ../../docker-publish -v minimal
     - cd ../../
+    - cp Dockerfile docker-publish
   buid-docker: 
     image: docker:17.04.0-ce
     when:
@@ -22,7 +23,7 @@ pipeline:
       - REGISTRY_PASSWORD=${REGISTRY_PASSWORD}
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-    commands:      
+    commands:
       - docker login --username=registry --password=$REGISTRY_PASSWORD registry.fsilva.me
       - docker build -t registry.fsilva.me/rest-country:1.0.${DRONE_BUILD_NUMBER} docker-publish
       - docker push registry.fsilva.me/rest-country:1.0.${DRONE_BUILD_NUMBER}
