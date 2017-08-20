@@ -34,7 +34,6 @@ namespace RestCountries.Api
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {
-                c.RoutePrefix = "doc";
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "RestCountry API");
             });
         }

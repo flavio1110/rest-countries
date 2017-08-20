@@ -17,9 +17,17 @@ namespace RestCountries.Api.Controllers
         }
 
         [HttpGet]
+        [ApiExplorerSettings(IgnoreApi = true)]
+        public IActionResult Get()
+        {
+            return Redirect("swagger");
+        }
+
+        [HttpGet]
+        [Route("All")]
         [ProducesResponseType(typeof(IEnumerable<Country>), 200)]
         [ResponseCache(Duration = 3000)]
-        public IActionResult Get()
+        public IActionResult All()
         {
             return Json(repository.GetAll());
         }
