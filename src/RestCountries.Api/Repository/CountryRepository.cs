@@ -1,5 +1,7 @@
+using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using Newtonsoft.Json;
 
 namespace RestCountries.Api
@@ -18,6 +20,11 @@ namespace RestCountries.Api
         public IEnumerable<Country> GetAll()
         {
             return countries;
+        }
+
+        public IEnumerable<Country> GetByPredicate(Func<Country, bool> predicate)
+        {
+            return countries.Where(predicate);
         }
     }
 }

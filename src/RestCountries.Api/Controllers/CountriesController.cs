@@ -29,7 +29,7 @@ namespace RestCountries.Api.Controllers
         [ResponseCache(Duration = 3000)]
         public IActionResult All()
         {
-            return Json(repository.GetAll());
+            return ListResponse(repository.GetAll());
         }
 
         [HttpGet]
@@ -39,46 +39,36 @@ namespace RestCountries.Api.Controllers
         [ResponseCache(Duration = 3000)]
         public IActionResult GetByName(string name)
         {
-            var countries = repository.GetAll()
-                .Where(c => c.Name.ToLower().Contains(name.ToLower()));
+            var countries = repository.GetByPredicate(
+                c => c.Name.ToLower().Contains(name.ToLower()));
 
-            if(!countries.Any())
-                return NotFound();
-
-            return Json(countries);
+            return ListResponse(countries);
         }
 
         [HttpGet]
         [Route("/name/{name}/full")]
-        [ProducesResponseType(typeof(Country), 200)]
+        [ProducesResponseType(typeof(IEnumerable<Country>), 200)]
         [ProducesResponseType(typeof(void), 404)]
         [ResponseCache(Duration = 3000)]
         public IActionResult GetByFullName(string name)
         {
-            var country = repository.GetAll()
-                .FirstOrDefault(c => string.Equals(c.Name, name, StringComparison.InvariantCultureIgnoreCase));
+            var countries = repository.GetByPredicate(
+                c => string.Equals(c.Name, name, StringComparison.InvariantCultureIgnoreCase));
 
-            if(country == null)
-                return NotFound();
-
-            return Json(country);
+            return ListResponse(countries);
         }
 
         [HttpGet]
         [Route("/alpha/{code}")]
-        [ProducesResponseType(typeof(Country), 200)]
+        [ProducesResponseType(typeof(IEnumerable<Country>), 200)]
         [ProducesResponseType(typeof(void), 404)]
         [ResponseCache(Duration = 3000)]
         public IActionResult GetByCode(string code)
         {
-            var country = repository.GetAll()
-                .FirstOrDefault(c => string.Equals(c.Alpha2Code, code, StringComparison.InvariantCultureIgnoreCase)
+            var countries = repository.GetByPredicate(c => string.Equals(c.Alpha2Code, code, StringComparison.InvariantCultureIgnoreCase)
                     || string.Equals(c.Alpha3Code, code, StringComparison.InvariantCultureIgnoreCase));
 
-            if(country == null)
-                return NotFound();
-
-            return Json(country);
+            return ListResponse(countries);
         }
 
         [HttpGet]
@@ -88,14 +78,11 @@ namespace RestCountries.Api.Controllers
         [ResponseCache(Duration = 3000)]
         public IActionResult GetByCurrency([FromRoute]string currency)
         {
-            var countries = repository.GetAll()
-                .Where(c => c.Currencies != null &&
+            var countries = repository.GetByPredicate(
+                c => c.Currencies != null &&
                     c.Currencies.Any(cur => string.Equals(cur.Code, currency, StringComparison.InvariantCultureIgnoreCase)));
 
-            if(!countries.Any())
-                return NotFound();
-
-            return Json(countries);
+            return ListResponse(countries);
         }
 
         [HttpGet]
@@ -105,15 +92,12 @@ namespace RestCountries.Api.Controllers
         [ResponseCache(Duration = 3000)]
         public IActionResult GetByLanguage([FromRoute]string languageCode)
         {
-            var countries = repository.GetAll()
-                .Where(c => c.Languages != null &&
+            var countries = repository.GetByPredicate(
+                c => c.Languages != null &&
                     c.Languages.Any(lang => string.Equals(lang.Iso639_1, languageCode, StringComparison.InvariantCultureIgnoreCase)
                     || string.Equals(lang.Iso639_2, languageCode, StringComparison.InvariantCultureIgnoreCase)));
 
-            if(!countries.Any())
-                return NotFound();
-
-            return Json(countries);
+            return ListResponse(countries);
         }
 
         [HttpGet]
@@ -123,14 +107,11 @@ namespace RestCountries.Api.Controllers
         [ResponseCache(Duration = 3000)]
         public IActionResult GetByCallingCode([FromRoute]string callingCode)
         {
-            var countries = repository.GetAll()
-                .Where(c => c.CallingCodes != null &&
+            var countries = repository.GetByPredicate(
+                c => c.CallingCodes != null &&
                     c.CallingCodes.Any(code => string.Equals(code, callingCode, StringComparison.InvariantCultureIgnoreCase)));
 
-            if(!countries.Any())
-                return NotFound();
-
-            return Json(countries);
+            return ListResponse(countries);
         }
 
         [HttpGet]
@@ -140,13 +121,10 @@ namespace RestCountries.Api.Controllers
         [ResponseCache(Duration = 3000)]
         public IActionResult GetByRegion([FromRoute]string region)
         {
-            var countries = repository.GetAll()
-                .Where(c => string.Equals(c.Region, region, StringComparison.InvariantCultureIgnoreCase));
+            var countries = repository.GetByPredicate(
+                c => string.Equals(c.Region, region, StringComparison.InvariantCultureIgnoreCase));
 
-            if(!countries.Any())
-                return NotFound();
-
-            return Json(countries);
+            return ListResponse(countries);
         }
 
         [HttpGet]
@@ -156,16 +134,18 @@ namespace RestCountries.Api.Controllers
         [ResponseCache(Duration = 3000)]
         public IActionResult GetByRegionalBlock(string blocAcronym)
         {
-            var countries = repository.GetAll()
-                .Where(c => c.RegionalBlocs != null &&
+            var countries = repository.GetByPredicate(
+                c => c.RegionalBlocs != null &&
                     c.RegionalBlocs.Any(block => string.Equals(block.Acronym, blocAcronym, StringComparison.InvariantCultureIgnoreCase)));
 
+            return ListResponse(countries);
+        }
 
-
-            if(!countries.Any())
-                return NotFound();
-
-            return Json(countries);
+        private IActionResult ListResponse(IEnumerable<Country> countries)
+        {   
+            return countries != null && countries.Any() 
+                ? (IActionResult)Json(countries)
+                : NotFound();
         }
     }
 }
