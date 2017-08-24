@@ -1,0 +1,334 @@
+[
+    {
+        "name": "Brazil",
+        "topLevelDomain": [
+            ".br"
+        ],
+        "alpha2Code": "BR",
+        "alpha3Code": "BRA",
+        "callingCodes": [
+            "55"
+        ],
+        "capital": "Brasília",
+        "altSpellings": [
+            "BR",
+            "Brasil",
+            "Federative Republic of Brazil",
+            "República Federativa do Brasil"
+        ],
+        "region": "Americas",
+        "subregion": "South America",
+        "population": 206135893,
+        "latlng": [
+            -10,
+            -55
+        ],
+        "demonym": "Brazilian",
+        "area": 8515767,
+        "gini": 54.7,
+        "timezones": [
+            "UTC-05:00",
+            "UTC-04:00",
+            "UTC-03:00",
+            "UTC-02:00"
+        ],
+        "borders": [
+            "ARG",
+            "BOL",
+            "COL",
+            "GUF",
+            "GUY",
+            "PRY",
+            "PER",
+            "SUR",
+            "URY",
+            "VEN"
+        ],
+        "nativeName": "Brasil",
+        "numericCode": "076",
+        "currencies": [
+            {
+                "code": "BRL",
+                "name": "Brazilian real",
+                "symbol": "R$"
+            }
+        ],
+        "languages": [
+            {
+                "iso639_1": "pt",
+                "iso639_2": "por",
+                "name": "Portuguese",
+                "nativeName": "Português"
+            }
+        ],
+        "translations": {
+            "de": "Brasilien",
+            "es": "Brasil",
+            "fr": "Brésil",
+            "ja": "ブラジル",
+            "it": "Brasile",
+            "br": "Brasil",
+            "pt": "Brasil"
+        },
+        "flag": "https://restcountries.eu/data/bra.svg",
+        "regionalBlocs": [
+            {
+                "acronym": "USAN",
+                "name": "Union of South American Nations",
+                "otherAcronyms": [
+                    "UNASUR",
+                    "UNASUL",
+                    "UZAN"
+                ],
+                "otherNames": [
+                    "Unión de Naciones Suramericanas",
+                    "União de Nações Sul-Americanas",
+                    "Unie van Zuid-Amerikaanse Naties",
+                    "South American Union"
+                ]
+            }
+        ]
+    },
+    {
+        "name": "Brazileia",
+        "topLevelDomain": [
+            ".br"
+        ],
+        "alpha2Code": "BR",
+        "alpha3Code": "BRA",
+        "callingCodes": [
+            "55"
+        ],
+        "capital": "Brasília",
+        "altSpellings": [
+            "BR",
+            "Brasil",
+            "Federative Republic of Brazil",
+            "República Federativa do Brasil"
+        ],
+        "region": "Americas",
+        "subregion": "South America",
+        "population": 206135893,
+        "latlng": [
+            -10,
+            -55
+        ],
+        "demonym": "Brazilian",
+        "area": 8515767,
+        "gini": 54.7,
+        "timezones": [
+            "UTC-05:00",
+            "UTC-04:00",
+            "UTC-03:00",
+            "UTC-02:00"
+        ],
+        "borders": [
+            "ARG",
+            "BOL",
+            "COL",
+            "GUF",
+            "GUY",
+            "PRY",
+            "PER",
+            "SUR",
+            "URY",
+            "VEN"
+        ],
+        "nativeName": "Brasil",
+        "numericCode": "076",
+        "currencies": [
+            {
+                "code": "BRL",
+                "name": "Brazilian real",
+                "symbol": "R$"
+            }
+        ],
+        "languages": [
+            {
+                "iso639_1": "pt",
+                "iso639_2": "por",
+                "name": "Portuguese",
+                "nativeName": "Português"
+            }
+        ],
+        "translations": {
+            "de": "Brasilien",
+            "es": "Brasil",
+            "fr": "Brésil",
+            "ja": "ブラジル",
+            "it": "Brasile",
+            "br": "Brasil",
+            "pt": "Brasil"
+        },
+        "flag": "https://restcountries.eu/data/bra.svg",
+        "regionalBlocs": [
+            {
+                "acronym": "USAN",
+                "name": "Union of South American Nations",
+                "otherAcronyms": [
+                    "UNASUR",
+                    "UNASUL",
+                    "UZAN"
+                ],
+                "otherNames": [
+                    "Unión de Naciones Suramericanas",
+                    "União de Nações Sul-Americanas",
+                    "Unie van Zuid-Amerikaanse Naties",
+                    "South American Union"
+                ]
+            }
+        ]
+    },
+    {
+        "name": "Netherlands",
+        "topLevelDomain": [
+            ".nl"
+        ],
+        "alpha2Code": "NL",
+        "alpha3Code": "NLD",
+        "callingCodes": [
+            "31"
+        ],
+        "capital": "Amsterdam",
+        "altSpellings": [
+            "NL",
+            "Holland",
+            "Nederland"
+        ],
+        "region": "Europe",
+        "subregion": "Western Europe",
+        "population": 17019800,
+        "latlng": [
+            52.5,
+            5.75
+        ],
+        "demonym": "Dutch",
+        "area": 41850,
+        "gini": 30.9,
+        "timezones": [
+            "UTC-04:00",
+            "UTC+01:00"
+        ],
+        "borders": [
+            "BEL",
+            "DEU"
+        ],
+        "nativeName": "Nederland",
+        "numericCode": "528",
+        "currencies": [
+            {
+                "code": "EUR",
+                "name": "Euro",
+                "symbol": "€"
+            }
+        ],
+        "languages": [
+            {
+                "iso639_1": "nl",
+                "iso639_2": "nld",
+                "name": "Dutch",
+                "nativeName": "Nederlands"
+            }
+        ],
+        "translations": {
+            "de": "Niederlande",
+            "es": "Países Bajos",
+            "fr": "Pays-Bas",
+            "ja": "オランダ",
+            "it": "Paesi Bassi",
+            "br": "Holanda",
+            "pt": "Países Baixos"
+        },
+        "flag": "https://restcountries.eu/data/nld.svg",
+        "regionalBlocs": [
+            {
+                "acronym": "EU",
+                "name": "European Union",
+                "otherAcronyms": [],
+                "otherNames": []
+            }
+        ]
+    },
+    {
+        "name": "United States of America",
+        "topLevelDomain": [
+            ".us"
+        ],
+        "alpha2Code": "US",
+        "alpha3Code": "USA",
+        "callingCodes": [
+            "1"
+        ],
+        "capital": "Washington, D.C.",
+        "altSpellings": [
+            "US",
+            "USA",
+            "United States of America"
+        ],
+        "region": "Americas",
+        "subregion": "Northern America",
+        "population": 323947000,
+        "latlng": [
+            38,
+            -97
+        ],
+        "demonym": "American",
+        "area": 9629091,
+        "gini": 48,
+        "timezones": [
+            "UTC-12:00",
+            "UTC-11:00",
+            "UTC-10:00",
+            "UTC-09:00",
+            "UTC-08:00",
+            "UTC-07:00",
+            "UTC-06:00",
+            "UTC-05:00",
+            "UTC-04:00",
+            "UTC+10:00",
+            "UTC+12:00"
+        ],
+        "borders": [
+            "CAN",
+            "MEX"
+        ],
+        "nativeName": "United States",
+        "numericCode": "840",
+        "currencies": [
+            {
+                "code": "USD",
+                "name": "United States dollar",
+                "symbol": "$"
+            }
+        ],
+        "languages": [
+            {
+                "iso639_1": "en",
+                "iso639_2": "eng",
+                "name": "English",
+                "nativeName": "English"
+            }
+        ],
+        "translations": {
+            "de": "Vereinigte Staaten von Amerika",
+            "es": "Estados Unidos",
+            "fr": "États-Unis",
+            "ja": "アメリカ合衆国",
+            "it": "Stati Uniti D'America",
+            "br": "Estados Unidos",
+            "pt": "Estados Unidos"
+        },
+        "flag": "https://restcountries.eu/data/usa.svg",
+        "regionalBlocs": [
+            {
+                "acronym": "NAFTA",
+                "name": "North American Free Trade Agreement",
+                "otherAcronyms": [],
+                "otherNames": [
+                    "Tratado de Libre Comercio de América del Norte",
+                    "Accord de Libre-échange Nord-Américain"
+                ]
+            }
+        ]
+    }
+]
