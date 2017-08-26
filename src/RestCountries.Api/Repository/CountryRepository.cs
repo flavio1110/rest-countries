@@ -27,7 +27,6 @@ namespace RestCountries.Api
         public async Task HydrateCache()
         {
             var countries = await GetCountries();
-            Console.WriteLine("Refreshing Cache");
             cache.Set(cacheKey, countries, TimeSpan.FromMinutes(1));
         }
 
