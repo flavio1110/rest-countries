@@ -14,9 +14,9 @@ namespace RestCountries.Api
             this.countryRepository = countryRepository;
         }
 
-        public async Task Execute(IJobExecutionContext context)
+        public Task Execute(IJobExecutionContext context)
         {
-            await countryRepository.HydrateCache();
+            return countryRepository.HydrateCache();
         }
     }
 }
