@@ -22,7 +22,7 @@ namespace RestCountries.Api
         public CountryRepository(IMemoryCache cache)
         {
             this.cache = cache;
-            HydrateCache().Wait();
+            //HydrateCache().Wait();
         }
 
         public async Task HydrateCache()
