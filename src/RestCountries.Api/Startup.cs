@@ -38,8 +38,6 @@ namespace RestCountries.Api
             IJobFactory jobFactory,
             ICountryRepository repository)
         {
-            repository.HydrateCache().Wait();
-
             JobsConfig.Start(appLifetime, jobFactory).Wait();
 
             app.UseMvc();
