@@ -25,7 +25,7 @@ namespace RestCountries.Api
 
             ITrigger trigger = TriggerBuilder.Create()
                 .WithIdentity("every30seconds", "defaultGroup")
-                .StartNow()
+                .StartAt(DateTimeOffset.FromUnixTimeSeconds(30))
                 .WithSimpleSchedule(x => x
                     .WithIntervalInSeconds(30)
                     .RepeatForever())

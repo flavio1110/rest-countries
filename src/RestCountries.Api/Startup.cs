@@ -35,8 +35,11 @@ namespace RestCountries.Api
 
         public void Configure(IApplicationBuilder app,
             IApplicationLifetime appLifetime,
-            IJobFactory jobFactory)
+            IJobFactory jobFactory,
+            ICountryRepository repository)
         {
+            repository.HydrateCache().Wait();
+
             JobsConfig.Start(appLifetime, jobFactory).Wait();
 
             app.UseMvc();

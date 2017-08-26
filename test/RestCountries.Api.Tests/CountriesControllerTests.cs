@@ -214,7 +214,6 @@ namespace RestCountries.Api.Tests
 
         private async Task<IEnumerable<Country>> GetCountriesResponse(HttpResponseMessage response)
         {
-            Console.WriteLine(response.StatusCode);
             response.IsSuccessStatusCode.ShouldBeTrue();
 
             var responseContent = await response.Content.ReadAsStringAsync();
