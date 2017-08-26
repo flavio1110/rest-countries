@@ -9,6 +9,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Quartz;
+using Quartz.Impl;
+using Quartz.Spi;
 using RestCountries.Api;
 using Swashbuckle.AspNetCore.Swagger;
 
@@ -18,18 +21,24 @@ namespace RestCountries.Api
     {
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddMemoryCache();
             services.AddMvc();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new Info { Title = "RestCountries" });
             });
-            
-            var repository = new CountryRepository();
-            services.TryAddSingleton<ICountryRepository>( _ => new CountryRepository());
+
+            services.TryAddSingleton<ICountryRepository, CountryRepository>();
+            services.TryAddSingleton<JobHydrator>();
+            services.TryAddSingleton<IJobFactory, CustomJobFactory>();
         }
 
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app,
+            IApplicationLifetime appLifetime,
+            IJobFactory jobFactory)
         {
+            JobsConfig.Start(appLifetime, jobFactory).Wait();
+
             app.UseMvc();
             app.UseSwagger();
             app.UseSwaggerUI(c =>

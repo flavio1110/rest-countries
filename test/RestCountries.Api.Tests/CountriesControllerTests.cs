@@ -14,21 +14,21 @@ using System.Net;
 
 namespace RestCountries.Api.Tests
 {
-    public class CountriesControllerTests
+    public class CountriesControllerTests : IDisposable
     {
-        private readonly TestServer _server;
-        private readonly HttpClient _client;
+        private readonly TestServer server;
+        private readonly HttpClient client;
 
         public CountriesControllerTests()
         {
-            _server = new TestServer(new WebHostBuilder().UseStartup<Startup>());
-            _client = _server.CreateClient();
+            server = new TestServer(new WebHostBuilder().UseStartup<Startup>());
+            client = server.CreateClient();
         }
 
         [Fact]
         public async Task GetAll_ShouldReturnAllCountries()
         {
-            var actual = await _client.GetAsync("/All");
+            var actual = await client.GetAsync("/All");
             
             var countries = await GetCountriesResponse(actual);
 
@@ -38,7 +38,7 @@ namespace RestCountries.Api.Tests
         [Fact]
         public async Task GetByName_WithName_ShouldReturnCountriesThatContainsThatName()
         {
-            var actual = await _client.GetAsync("/name/bra");
+            var actual = await client.GetAsync("/name/bra");
             
             var countries = await GetCountriesResponse(actual);
 
@@ -50,7 +50,7 @@ namespace RestCountries.Api.Tests
         [Fact]
         public async Task GetByName_WithNonExistingName_ShouldReturnNotFound()
         {
-            var actual = await _client.GetAsync("/name/trump");
+            var actual = await client.GetAsync("/name/trump");
             
             ShouldBeNotFound(actual);
         }
@@ -58,7 +58,7 @@ namespace RestCountries.Api.Tests
         [Fact]
         public async Task GetByFullName_WithFullName_ShouldReturnCountriesThatHaveThatName()
         {
-            var actual = await _client.GetAsync("/name/brazil/full");
+            var actual = await client.GetAsync("/name/brazil/full");
             
             var countries = await GetCountriesResponse(actual);
 
@@ -69,7 +69,7 @@ namespace RestCountries.Api.Tests
         [Fact]
         public async Task GetByFullName_WithNonExistingName_ShouldReturnNotFound()
         {
-            var actual = await _client.GetAsync("/name/trumpland/full");
+            var actual = await client.GetAsync("/name/trumpland/full");
             
             ShouldBeNotFound(actual);
         }
@@ -77,7 +77,7 @@ namespace RestCountries.Api.Tests
         [Fact]
         public async Task GetByCode_WithApha2Code_ShouldReturnCountriesThatHaveThatCode()
         {
-            var actual = await _client.GetAsync("/alpha/nl");
+            var actual = await client.GetAsync("/alpha/nl");
             
             var countries = await GetCountriesResponse(actual);
 
@@ -88,7 +88,7 @@ namespace RestCountries.Api.Tests
         [Fact]
         public async Task GetByCode_WithApha3Code_ShouldReturnCountriesThatHaveThatCode()
         {
-            var actual = await _client.GetAsync("/alpha/nld");
+            var actual = await client.GetAsync("/alpha/nld");
             
             var countries = await GetCountriesResponse(actual);
 
@@ -99,7 +99,7 @@ namespace RestCountries.Api.Tests
         [Fact]
         public async Task GetByCode_WithNonExistingApha3Code_ShouldReturnCountriesThatHaveThatCode()
         {
-            var actual = await _client.GetAsync("/alpha/tmp");
+            var actual = await client.GetAsync("/alpha/tmp");
             
             ShouldBeNotFound(actual);
         }
@@ -107,7 +107,7 @@ namespace RestCountries.Api.Tests
         [Fact]
         public async Task GetByCode_WithNonExistingApha2Code_ShouldReturnCountriesThatHaveThatCode()
         {
-            var actual = await _client.GetAsync("/alpha/tp");
+            var actual = await client.GetAsync("/alpha/tp");
             
             ShouldBeNotFound(actual);
         }
@@ -115,7 +115,7 @@ namespace RestCountries.Api.Tests
         [Fact]
         public async Task GetByCurrency_WithCurrencyCode_ShouldReturnCountriesThatHaveThatCode()
         {
-            var actual = await _client.GetAsync("/currency/usd");
+            var actual = await client.GetAsync("/currency/usd");
             
             var countries = await GetCountriesResponse(actual);
 
@@ -126,7 +126,7 @@ namespace RestCountries.Api.Tests
         [Fact]
         public async Task GetByCurrency_WithNonExistingCurrencyCode_ShouldReturnCountriesThatHaveThatCode()
         {
-            var actual = await _client.GetAsync("/currency/bitcoin");
+            var actual = await client.GetAsync("/currency/bitcoin");
             
             ShouldBeNotFound(actual);
         }
@@ -134,7 +134,7 @@ namespace RestCountries.Api.Tests
         [Fact]
         public async Task GetByLanguage_WithLanguageCode_ShouldReturnCountriesThatHaveThatCode()
         {
-            var actual = await _client.GetAsync("/lang/nl");
+            var actual = await client.GetAsync("/lang/nl");
             
             var countries = await GetCountriesResponse(actual);
 
@@ -145,7 +145,7 @@ namespace RestCountries.Api.Tests
         [Fact]
         public async Task GetByLanguage_WithNonExistingLanguageCode_ShouldReturnCountriesThatHaveThatCode()
         {
-            var actual = await _client.GetAsync("/lang/jp");
+            var actual = await client.GetAsync("/lang/jp");
             
             ShouldBeNotFound(actual);
         }
@@ -153,7 +153,7 @@ namespace RestCountries.Api.Tests
         [Fact]
         public async Task GetByCallingCode_WithCallingCode_ShouldReturnCountriesThatHaveThatCode()
         {
-            var actual = await _client.GetAsync("/callingcode/31");
+            var actual = await client.GetAsync("/callingcode/31");
             
             var countries = await GetCountriesResponse(actual);
 
@@ -164,7 +164,7 @@ namespace RestCountries.Api.Tests
         [Fact]
         public async Task GetByCallingCode_WithNonExistingCallingCode_ShouldReturnCountriesThatHaveThatCode()
         {
-            var actual = await _client.GetAsync("/callingcode/88");
+            var actual = await client.GetAsync("/callingcode/88");
             
             ShouldBeNotFound(actual);
         }
@@ -172,7 +172,7 @@ namespace RestCountries.Api.Tests
         [Fact]
         public async Task GetByRegion_WithRegionCode_ShouldReturnCountriesThatHaveThatCode()
         {
-            var actual = await _client.GetAsync("/region/europe");
+            var actual = await client.GetAsync("/region/europe");
             
             var countries = await GetCountriesResponse(actual);
 
@@ -183,7 +183,7 @@ namespace RestCountries.Api.Tests
         [Fact]
         public async Task GetByRegion_WithNonExistingRegionCode_ShouldReturnCountriesThatHaveThatCode()
         {
-            var actual = await _client.GetAsync("/region/africa");
+            var actual = await client.GetAsync("/region/africa");
             
             ShouldBeNotFound(actual);
         }
@@ -191,7 +191,7 @@ namespace RestCountries.Api.Tests
         [Fact]
         public async Task GetByRegionalBlock_WithRegionalBlockCode_ShouldReturnCountriesThatHaveThatCode()
         {
-            var actual = await _client.GetAsync("/regionalblock/eu");
+            var actual = await client.GetAsync("/regionalblock/eu");
             
             var countries = await GetCountriesResponse(actual);
 
@@ -202,7 +202,7 @@ namespace RestCountries.Api.Tests
         [Fact]
         public async Task GetByRegionalBlock_WithNonExistingRegionalBlockCode_ShouldReturnCountriesThatHaveThatCode()
         {
-            var actual = await _client.GetAsync("/regionalblock/wtf");
+            var actual = await client.GetAsync("/regionalblock/wtf");
             
             ShouldBeNotFound(actual);
         }
@@ -221,5 +221,10 @@ namespace RestCountries.Api.Tests
             return JsonConvert.DeserializeObject<IEnumerable<Country>>(responseContent);
         }
 
+        public void Dispose()
+        {
+            client.Dispose();
+            server.Dispose();
+        }
     }
 }
