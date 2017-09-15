@@ -21,6 +21,7 @@ namespace RestCountries.Api
     {
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors();
             services.AddMemoryCache();
             services.AddMvc();
             services.AddSwaggerGen(c =>
@@ -40,6 +41,11 @@ namespace RestCountries.Api
         {
             JobsConfig.Start(appLifetime, jobFactory).Wait();
 
+            app.UseCors(builder => 
+                builder.AllowAnyOrigin()
+                    .AllowAnyMethod()
+                    .AllowAnyHeader()
+            );
             app.UseMvc();
             app.UseSwagger();
             app.UseSwaggerUI(c =>
