@@ -10,7 +10,7 @@ pipeline:
     - dotnet build
     - dotnet test test/RestCountries.Api.Tests/RestCountries.Api.Tests.csproj --no-restore --no-build -v m
     - cd src/RestCountries.Api/
-    - dotnet publish -c Release -o ../../docker-publish -v minimal
+    - dotnet publish -c Release -o ../../docker-publish -v diag
     - cd ../../
     - cp Dockerfile docker-publish
   buid-docker: 
