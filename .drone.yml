@@ -8,9 +8,9 @@ pipeline:
     - dotnet --info
     - dotnet restore
     - dotnet build
-    - dotnet test test/RestCountries.Api.Tests/RestCountries.Api.Tests.csproj --no-restore --no-build -v m
+    - dotnet test test/RestCountries.Api.Tests/RestCountries.Api.Tests.csproj --no-restore --no-build -v diag
     - cd src/RestCountries.Api/
-    - dotnet publish -c Release -o ../../docker-publish -v diag
+    - dotnet publish -c Release -o ../../docker-publish -v minimal
     - cd ../../
     - cp Dockerfile docker-publish
   buid-docker: 
