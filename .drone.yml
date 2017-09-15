@@ -8,7 +8,7 @@ pipeline:
     - dotnet --info
     - dotnet restore
     - dotnet build
-    - dotnet test test/RestCountries.Api.Tests/RestCountries.Api.Tests.csproj --no-restore --no-build -v diag
+    - dotnet test test/RestCountries.Api.Tests/RestCountries.Api.Tests.csproj --no-restore --no-build -v minimal -p:ParallelizeTestCollections=false
     - cd src/RestCountries.Api/
     - dotnet publish -c Release -o ../../docker-publish -v minimal
     - cd ../../
