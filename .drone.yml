@@ -3,7 +3,6 @@ pipeline:
     image: microsoft/dotnet:2.0.0-sdk
     when:
       event: push
-      branch: [master]
     privileged: true
     commands:
     - dotnet --info
