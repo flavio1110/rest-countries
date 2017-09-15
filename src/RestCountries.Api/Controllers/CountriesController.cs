@@ -26,7 +26,7 @@ namespace RestCountries.Api.Controllers
         [HttpGet]
         [Route("All")]
         [ProducesResponseType(typeof(IEnumerable<Country>), 200)]
-        [ResponseCache(Duration = 3000)]
+        [ResponseCache(Duration = 120)]
         public IActionResult All()
         {
             return ListResponse(repository.GetAll());
@@ -36,7 +36,7 @@ namespace RestCountries.Api.Controllers
         [Route("/name/{name}")]
         [ProducesResponseType(typeof(IEnumerable<Country>), 200)]
         [ProducesResponseType(typeof(void), 404)]
-        [ResponseCache(Duration = 3000)]
+        [ResponseCache(Duration = 120)]
         public IActionResult GetByName(string name)
         {
             var countries = repository.GetByPredicate(
@@ -49,7 +49,7 @@ namespace RestCountries.Api.Controllers
         [Route("/name/{name}/full")]
         [ProducesResponseType(typeof(IEnumerable<Country>), 200)]
         [ProducesResponseType(typeof(void), 404)]
-        [ResponseCache(Duration = 3000)]
+        [ResponseCache(Duration = 120)]
         public IActionResult GetByFullName(string name)
         {
             var countries = repository.GetByPredicate(
@@ -62,7 +62,7 @@ namespace RestCountries.Api.Controllers
         [Route("/alpha/{code}")]
         [ProducesResponseType(typeof(IEnumerable<Country>), 200)]
         [ProducesResponseType(typeof(void), 404)]
-        [ResponseCache(Duration = 3000)]
+        [ResponseCache(Duration = 120)]
         public IActionResult GetByCode(string code)
         {
             var countries = repository.GetByPredicate(c => string.Equals(c.Alpha2Code, code, StringComparison.InvariantCultureIgnoreCase)
@@ -75,7 +75,7 @@ namespace RestCountries.Api.Controllers
         [Route("/currency/{currency}")]
         [ProducesResponseType(typeof(IEnumerable<Country>), 200)]
         [ProducesResponseType(typeof(void), 404)]
-        [ResponseCache(Duration = 3000)]
+        [ResponseCache(Duration = 120)]
         public IActionResult GetByCurrency([FromRoute]string currency)
         {
             var countries = repository.GetByPredicate(
@@ -89,7 +89,7 @@ namespace RestCountries.Api.Controllers
         [Route("/lang/{languageCode}")]
         [ProducesResponseType(typeof(IEnumerable<Country>), 200)]
         [ProducesResponseType(typeof(void), 404)]
-        [ResponseCache(Duration = 3000)]
+        [ResponseCache(Duration = 120)]
         public IActionResult GetByLanguage([FromRoute]string languageCode)
         {
             var countries = repository.GetByPredicate(
@@ -104,7 +104,7 @@ namespace RestCountries.Api.Controllers
         [Route("/callingcode/{callingCode}")]
         [ProducesResponseType(typeof(IEnumerable<Country>), 200)]
         [ProducesResponseType(typeof(void), 404)]
-        [ResponseCache(Duration = 3000)]
+        [ResponseCache(Duration = 120)]
         public IActionResult GetByCallingCode([FromRoute]string callingCode)
         {
             var countries = repository.GetByPredicate(
@@ -118,7 +118,7 @@ namespace RestCountries.Api.Controllers
         [Route("/region/{region}")]
         [ProducesResponseType(typeof(IEnumerable<Country>), 200)]
         [ProducesResponseType(typeof(void), 404)]
-        [ResponseCache(Duration = 3000)]
+        [ResponseCache(Duration = 120)]
         public IActionResult GetByRegion([FromRoute]string region)
         {
             var countries = repository.GetByPredicate(
@@ -131,7 +131,7 @@ namespace RestCountries.Api.Controllers
         [Route("/regionalblock/{blocAcronym}")]
         [ProducesResponseType(typeof(IEnumerable<Country>), 200)]
         [ProducesResponseType(typeof(void), 404)]
-        [ResponseCache(Duration = 3000)]
+        [ResponseCache(Duration = 120)]
         public IActionResult GetByRegionalBlock(string blocAcronym)
         {
             var countries = repository.GetByPredicate(
