@@ -1,16 +1,14 @@
-using System;
-using Xunit;
-using RestCountries.Api.Controllers;
-using RestCountries.Api;
-using Newtonsoft.Json;
-using Microsoft.AspNetCore.TestHost;
-using System.Net.Http;
 using Microsoft.AspNetCore.Hosting;
-using System.Threading.Tasks;
-using System.Linq;
+using Microsoft.AspNetCore.TestHost;
+using Newtonsoft.Json;
 using Shouldly;
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net;
+using System.Net.Http;
+using System.Threading.Tasks;
+using Xunit;
 
 namespace RestCountries.Api.Tests
 {

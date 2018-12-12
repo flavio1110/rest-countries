@@ -1,18 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
-using Quartz;
-using Quartz.Impl;
 using Quartz.Spi;
-using RestCountries.Api;
 using Swashbuckle.AspNetCore.Swagger;
 
 namespace RestCountries.Api
@@ -36,8 +26,7 @@ namespace RestCountries.Api
 
         public void Configure(IApplicationBuilder app,
             IApplicationLifetime appLifetime,
-            IJobFactory jobFactory,
-            ICountryRepository repository)
+            IJobFactory jobFactory)
         {
             JobsConfig.Start(appLifetime, jobFactory).Wait();
 
