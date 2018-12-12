@@ -40,7 +40,7 @@ namespace RestCountries.Api.Controllers
         public IActionResult GetByName(string name)
         {
             var countries = repository.GetByPredicate(
-                c => c.Name.ToLower().Contains(name.ToLower()));
+                c => c.Name.IndexOf(name, StringComparison.InvariantCultureIgnoreCase) >= 0);
 
             return ListResponse(countries);
         }
