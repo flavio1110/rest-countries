@@ -1,8 +1,7 @@
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
 
 namespace RestCountries.Api.Controllers
 {
@@ -26,7 +25,7 @@ namespace RestCountries.Api.Controllers
         [HttpGet]
         [Route("All")]
         [ProducesResponseType(typeof(IEnumerable<Country>), 200)]
-        [ResponseCache(Duration = 120)]
+        //[ResponseCache(Duration = 120)]
         public IActionResult All()
         {
             return ListResponse(repository.GetAll());
@@ -79,8 +78,7 @@ namespace RestCountries.Api.Controllers
         public IActionResult GetByCurrency([FromRoute]string currency)
         {
             var countries = repository.GetByPredicate(
-                c => c.Currencies != null &&
-                    c.Currencies.Any(cur => string.Equals(cur.Code, currency, StringComparison.InvariantCultureIgnoreCase)));
+                c => c.Currencies?.Any(cur => string.Equals(cur.Code, currency, StringComparison.InvariantCultureIgnoreCase)) == true);
 
             return ListResponse(countries);
         }
@@ -93,9 +91,8 @@ namespace RestCountries.Api.Controllers
         public IActionResult GetByLanguage([FromRoute]string languageCode)
         {
             var countries = repository.GetByPredicate(
-                c => c.Languages != null &&
-                    c.Languages.Any(lang => string.Equals(lang.Iso639_1, languageCode, StringComparison.InvariantCultureIgnoreCase)
-                    || string.Equals(lang.Iso639_2, languageCode, StringComparison.InvariantCultureIgnoreCase)));
+                c => c.Languages?.Any(lang => string.Equals(lang.Iso639_1, languageCode, StringComparison.InvariantCultureIgnoreCase)
+                    || string.Equals(lang.Iso639_2, languageCode, StringComparison.InvariantCultureIgnoreCase)) == true);
 
             return ListResponse(countries);
         }
@@ -135,15 +132,14 @@ namespace RestCountries.Api.Controllers
         public IActionResult GetByRegionalBlock(string blocAcronym)
         {
             var countries = repository.GetByPredicate(
-                c => c.RegionalBlocs != null &&
-                    c.RegionalBlocs.Any(block => string.Equals(block.Acronym, blocAcronym, StringComparison.InvariantCultureIgnoreCase)));
+                c => c.RegionalBlocs?.Any(block => string.Equals(block.Acronym, blocAcronym, StringComparison.InvariantCultureIgnoreCase)) == true);
 
             return ListResponse(countries);
         }
 
         private IActionResult ListResponse(IEnumerable<Country> countries)
-        {   
-            return countries != null && countries.Any() 
+        {
+            return countries != null && countries.Any()
                 ? (IActionResult)Json(countries)
                 : NotFound();
         }
